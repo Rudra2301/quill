@@ -338,7 +338,7 @@ public class PostViewActivity extends BaseActivity implements
 
     @Subscribe
     public void onPostSyncedEvent(PostSyncedEvent event) {
-        if (event.uuid.equals(mPost.getUuid()) && mbPreviewPost) {
+        if (event.id.equals(mPost.getId()) && mbPreviewPost) {
             mHandler.removeCallbacks(mSaveTimeoutRunnable);
             startBrowserActivity(PostUtils.getPostUrl(mPost));
             if (mProgressDialog != null) {
@@ -372,7 +372,7 @@ public class PostViewActivity extends BaseActivity implements
 
     @Subscribe
     public void onPostSavedEvent(PostSavedEvent event) {
-        if (! mPost.getUuid().equals(event.post.getUuid())) {
+        if (! mPost.getId().equals(event.post.getId())) {
             return;
         }
         updatePost(event.post);
